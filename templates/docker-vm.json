@@ -250,7 +250,7 @@
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "apiVersion": "2019-07-01",
-            "name": "dev-vm-01/azure-ai-eng-lab-vm",
+            "name": "DockerVM/docker-vm-post-install",
             "location": "[resourceGroup().location]",
             "tags": {
                 "displayName": "App deployment script for VM"
