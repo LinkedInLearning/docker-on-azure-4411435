@@ -67,7 +67,7 @@
         },
         "scriptUrl": {
             "type": "string",
-            "defaultValue": "https://raw.githubusercontent.com/davidokeyode/azure-offensive/master/generic/azure-ai-eng-lab-vm.ps1",
+            "defaultValue": "https://raw.githubusercontent.com/LinkedInLearning/docker-on-azure-4411435/main/templates/docker-vm-post-install.ps1",
             "metadata": {
                 "description": "Custom script extension PowerShell script to run post-installation"
             }
@@ -267,7 +267,7 @@
                     "fileUris": [
                         "[parameters('scriptUrl')]"
                     ],
-                    "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File azure-ai-eng-lab-vm.ps1"
+                    "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File docker-vm-post-install.ps1"
                 }
             }
         }
