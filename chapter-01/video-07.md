@@ -10,7 +10,7 @@
 **`Visibility`**: Private
 **`Create`**
 
-2. Azure DevOps Console → containerapp (Project) → Repos → Copy URL
+2. Azure DevOps Console → containerapp (Project) → Repos → Clone to your computer → Copy URL
 
 
 ### Initialize git and push code to the remote repository
@@ -29,22 +29,21 @@ git status
 ```
 
 ### Create and run pipeline
-Azure DevOps Console → containerapp → Pipelines → Create pipeline
+* Azure DevOps Console → containerapp → Pipelines → Create pipeline
+  * **`Where is your code?`**: Azure Repos Git → containerapp
+  * **`Configure your pipeline`**: Docker - Build and push an image to Azure Container Registry → Select your Azure subscription → Continue
 
-**`Where is your code?`**: Azure Repos Git → containerapp
-**`Configure your pipeline`**: Docker - Build and push an image to Azure Container Registry → Select your Azure subscription → Continue
+* **`Container registry`**: doazacr*********
+* **`Image Name`**: containerappdevops
+* **`Dockerfile`**: $(Build.SourcesDirectory)/Dockerfile
+* Validate and configure
 
-**`Container registry`**: doazacr*********
-**`Image Name`**: containerappdevops
-**`Dockerfile`**: $(Build.SourcesDirectory)/Dockerfile
-Validate and configure
+* Review pipeline
 
-Review pipeline
+* Save and run → Save and run
 
-Save and run → Save and run
-
-Select and monitor Build job
+* Select and monitor Build job
 
 
 ### Review the container image in the registry
-Azure Portal → Container registries → doazacr******* → Services → Repositories → containerappdevops
+* Azure Portal → Container registries → doazacr******* → Services → Repositories → containerappdevops

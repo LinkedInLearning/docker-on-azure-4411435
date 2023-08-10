@@ -25,8 +25,8 @@ VS Code → Extensions → Search for Docker → Install the extension
 VS Code → F1 → Docker: Add docker files to workspace
 .NET: ASP.NET Core
 Linux
-80,443
-Docker Compose: No
+80,443 → Enter
+Include optional Docker Compose files?: No
 
 Review Dockerfile
 Right click Dockerfile → Build image
@@ -49,18 +49,19 @@ docker container stop <container_id>
 ```
 az login
 
-$group = "DockerOnAzureCourse-RG"
+$group = "DockerOnAzureCourse-HOL-RG"
 $location = "eastus"
 $random = Get-Random
 $acrname = "doazacr$random"
 
 az group create --resource-group $group --location eastus
 az acr create --resource-group $group --name $acrname --sku Basic --admin-enabled true
+```
 
+### View the repositories and images in the registry
+* It should be empty as we are yet to create a repository or push an image to the registry
+```
 az acr repository list --name $acrname
-az acr repository show --name $acrname --repository containerapp
-
-az acr manifest list-metadata $acrloginserver/containerapp
 ```
 
 ### Upload the containerized app to the registry
@@ -87,6 +88,11 @@ docker image ls
 docker push $acrloginserver/containerapp:latest
 ```
 
+### Verify the image in the registry
+```
+az acr repository list --name $acrname
 
+az acr repository show --name $acrname --repository containerapp
 
-
+az acr manifest list-metadata $acrloginserver/containerapp
+```
