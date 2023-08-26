@@ -44,12 +44,10 @@ az container create --resource-group $group --file secret-volume-demo.yaml
 
 ### Validate volume mount
 ```
-az container exec -g $RG -n secret-volume-demo --exec-command "/bin/sh"
+az container exec -g $group -n secret-volume-demo --exec-command "/bin/sh"
 
 ls /mnt/secrets
 cat /mnt/secrets/secret1
 
 exit
 ```
-
->* Verify in storage account file share

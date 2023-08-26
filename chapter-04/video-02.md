@@ -73,10 +73,11 @@ az container create --resource-group $group --file file-share-volume-demo.yaml
 
 ### Validate volume mount
 ```
-az container exec -g $RG -n file-share-volume-demo --exec-command "/bin/sh"
+az container exec -g $group -n file-share-volume-demo --exec-command "/bin/sh"
 
 ls /aci/data
 touch /aci/data/data02.txt
+exit
 ```
 
 >* Verify in storage account file share
