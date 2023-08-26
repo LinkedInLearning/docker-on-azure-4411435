@@ -68,7 +68,7 @@ type: Microsoft.ContainerInstance/containerGroups
 
 ### Create the container instance using the YAML template
 ```
-az container create --resource-group $RG --file file-share-volume-demo.yaml
+az container create --resource-group $group --file file-share-volume-demo.yaml
 ```
 
 ### Validate volume mount
