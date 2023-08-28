@@ -1,17 +1,16 @@
-
-### Generate Base64 encoding of a secret value
+### Set variables
 ```
-echo "sensitivesecret" | base64
+group="DockerOnAzureCourse-HOL-RG"
+location="eastus"
 ```
 
 ### Create a YAML file for the container instance
-* Replace **`BASE_64_ENCODED_VALUE`** with the value generated earlier
 ```
-code emptydir-volume-demo.yaml
+code gitrepo-volume-demo.yaml
 
 apiVersion: '2019-12-01'
 location: eastus
-name: emptydir-volume-demo
+name: gitrepo-volume-demo
 properties:
   containers:
   - name: aci-app-01
@@ -25,45 +24,38 @@ properties:
           cpu: 1.0
           memoryInGB: 4
       volumeMounts:
-      - mountPath: /mnt/shareddata
-        name: emptydir
-  osType: Linux
-  restartPolicy: Always
-  - name: aci-app-02
-    properties:
-      environmentVariables: []
-      image: ubuntu
-      command: ["tail", "-f", "/dev/null"]
-      ports: []
-      resources:
-        requests:
-          cpu: 1.0
-          memoryInGB: 4
-      volumeMounts:
-      - mountPath: /mnt/shareddata
-        name: emptydir
+      - mountPath: /mnt/repo1
+        name: gitrepo1
+      - mountPath: /mnt/repo2
+        name: gitrepo2
   osType: Linux
   restartPolicy: Always
   volumes:
-  - name: emptydir
-    emptyDir: {}
+  - name: gitrepo1
+    gitRepo: {
+      "repository": "https://github.com/Azure-Samples/aci-helloworld"
+    }
+  - name: gitrepo2
+    gitRepo: {
+      "directory": "my-custom-clone-directory",
+      "repository": "https://github.com/Azure-Samples/aci-helloworld",
+      "revision": "d5ccfcedc0d81f7ca5e3dbe6e5a7705b579101f1"
+    }
 tags: {}
 type: Microsoft.ContainerInstance/containerGroups
 ```
 
 ### Create the container instance using the YAML template
 ```
-az container create --resource-group $group --file emptydir-volume-demo.yaml
+az container create --resource-group $group --file gitrepo-volume-demo.yaml
 ```
 
-### Validate volume mount
+### Validate gitRepo volume mount
 ```
-az container exec -g $group -name emptydir-volume-demo --container-name aci-app-01 --exec-command "/bin/sh"
-ls /mnt/shareddata
-touch /mnt/shareddata/data.txt
-exit
+az container exec -g $group --name gitrepo-volume-demo --container-name aci-app-01 --exec-command "/bin/sh"
 
-az container exec -g $group -name emptydir-volume-demo --container-name aci-app-02 --exec-command "/bin/sh"
-ls /mnt/shareddata
+ls /mnt/repo1/aci-helloworld
+ls /mnt/repo2/my-custom-clone-directory
+
 exit
 ```

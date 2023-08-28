@@ -1,11 +1,10 @@
-
-### Generate Base64 encoding of a secret value
+### Set variables
 ```
-echo "sensitivesecret" | base64
+group="DockerOnAzureCourse-HOL-RG"
+location="eastus"
 ```
 
 ### Create a YAML file for the container instance
-* Replace **`BASE_64_ENCODED_VALUE`** with the value generated earlier
 ```
 code emptydir-volume-demo.yaml
 
@@ -58,7 +57,7 @@ az container create --resource-group $group --file emptydir-volume-demo.yaml
 
 ### Validate volume mount
 ```
-az container exec -g $group -name emptydir-volume-demo --container-name aci-app-01 --exec-command "/bin/sh"
+az container exec -g $group --name emptydir-volume-demo --container-name aci-app-01 --exec-command "/bin/sh"
 ls /mnt/shareddata
 touch /mnt/shareddata/data.txt
 exit

@@ -12,6 +12,7 @@
 1. VS Code → Views → Home → Index.cshtml
 * Change "Welcome" to "Docker on Azure Course"
 * Commit → Message: "modified header" → Commit → Would you like to stage all changes: Yes → Sync changes
+* This action will pull and push commits from and to "origin/master": OK
 
 ### Review the pipeline run
 1. Azure DevOps Console → containerapp → Pipelines → Runs → Create pipeline

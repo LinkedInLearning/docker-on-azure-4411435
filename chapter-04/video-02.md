@@ -2,11 +2,11 @@
 
 ### Set variables
 ```
-$group = "DockerOnAzureCourse-HOL-RG"
-$location = "eastus"
-$random = $RANDOM
-$storageAccountName = "doazstore$random"
-$sharename = "containerstore"
+group="DockerOnAzureCourse-HOL-RG"
+location="eastus"
+random=$RANDOM
+storageAccountName="doazstore$random"
+sharename="containerstore"
 ```
 
 ### Create a storage account with the parameters
@@ -73,7 +73,7 @@ az container create --resource-group $group --file file-share-volume-demo.yaml
 
 ### Validate volume mount
 ```
-az container exec -g $group -n file-share-volume-demo --exec-command "/bin/sh"
+az container exec -g $group --name file-share-volume-demo --exec-command "/bin/sh"
 
 ls /aci/data
 touch /aci/data/data02.txt

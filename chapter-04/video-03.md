@@ -1,4 +1,10 @@
 
+### Set variables
+```
+group="DockerOnAzureCourse-HOL-RG"
+location="eastus"
+```
+
 ### Generate Base64 encoding of a secret value
 ```
 echo "sensitivesecret" | base64
@@ -44,7 +50,7 @@ az container create --resource-group $group --file secret-volume-demo.yaml
 
 ### Validate volume mount
 ```
-az container exec -g $group -n secret-volume-demo --exec-command "/bin/sh"
+az container exec -g $group --name secret-volume-demo --exec-command "/bin/sh"
 
 ls /mnt/secrets
 cat /mnt/secrets/secret1
