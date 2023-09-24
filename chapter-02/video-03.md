@@ -14,22 +14,22 @@ $acrusername = $(az acr credential show --name $acrname --query username)
 $acrpassword = $(az acr credential show --name $acrname --query 'passwords[0].value')
 ```
 
-### Generate a random name for the container instance
+### Install/Upgrade the Azure Container Apps extension for Azure CLI
+* The extension is in preview
 ```
-$random = Get-Random
-$acidnsname = "containerapp$random"
+az extension add --name containerapp --upgrade
 ```
 
-### Deploy the container instance using Azure CLI
+### Deploy the container app
 ```
-az container create --resource-group $group --name "containerapp-aci" --image "$acrloginserver/containerapp:latest" --dns-name-label "$acidnsname" --ports 80 --cpu 2 --memory 4 --registry-username $acrusername --registry-password $acrpassword
+az containerapp up --name "containerapp-aca" --resource-group $group --location $location --environment 'container-apps' --image "$acrloginserver/containerappdevops" --target-port 80 --ingress external --registry-username $acrusername --registry-password $acrpassword
 ```
 
 ### Validate that the container app is running
 ```
-$acifqdn = $(az container show --resource-group $group --name containerapp --query ipAddress.fqdn --output tsv)
+$acafqdn = $(az containerapp show --resource-group $group --name "containerapp-aca" --query properties.configuration.ingress.fqdn --output tsv)
 
-start chrome http://$acifqdn
+start chrome http://$acafqdn
 ```
 
 
