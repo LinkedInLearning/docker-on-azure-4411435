@@ -4,7 +4,7 @@
 * Azure DevOps Organization
 
 ### Modify the pipeline to include a deployment stage
-1. Azure DevOps Console → project → containerapp → Pipelines → containerapp → Edit
+1. Azure DevOps Console → project → containerappdevops → Pipelines → containerappdevops → Edit
 
 2. Add a new stage
 ```
@@ -31,14 +31,14 @@
           acrpassword=$(az acr credential show --name $acrname --query 'passwords[0].value' --output tsv)
           
           random=$RANDOM
-          acidnsname="containerapp$random"
+          acidnsname="containerappdevops$random"
             
           # Retry logic
           max_retries=5
           retries=0
           while [ $retries -lt $max_retries ]; do
             # Create the container
-              az container create --resource-group $group --name "containerapp-aci" --image "$acrloginserver/containerappdevops:$(tag)" --dns-name-label "$acidnsname" --ports 80 --cpu 2 --memory 4 --registry-username $acrusername --registry-password $acrpassword
+              az container create --resource-group $group --name "containerappdevops-aci" --image "$acrloginserver/containerappdevops:$(tag)" --dns-name-label "$acidnsname" --ports 80 --cpu 2 --memory 4 --registry-username $acrusername --registry-password $acrpassword
               
               # Check if the container creation was successful
               if [ $? -eq 0 ]; then
@@ -46,7 +46,7 @@
               fi
               
               # Check the status of the container
-              status=$(az container show --resource-group $group --name "containerapp-aci" --query "instanceView.state" --output tsv)
+              status=$(az container show --resource-group $group --name "containerappdevops-aci" --query "instanceView.state" --output tsv)
               
               # If the container is transitioning, wait and retry
               if [ "$status" == "Transitioning" ]; then
