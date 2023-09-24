@@ -22,7 +22,7 @@ az extension add --name containerapp --upgrade
 
 ### Deploy the container app
 ```
-az containerapp up --name "containerapp-aca" --resource-group $group --location $location --environment 'container-apps' --image "$acrloginserver/containerappdevops" --target-port 80 --ingress external --registry-username $acrusername --registry-password $acrpassword
+az containerapp up --name "containerapp-aca" --resource-group $group --location $location --environment 'container-apps' --image "$acrloginserver/containerapp:latest" --target-port 80 --ingress external --registry-username $acrusername --registry-password $acrpassword
 ```
 
 ### Validate that the container app is running
