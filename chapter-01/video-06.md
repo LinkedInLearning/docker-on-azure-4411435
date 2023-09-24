@@ -45,7 +45,7 @@ start chrome http://localhost:80
 docker container stop <container_id>
 ```
 
-### Create a container registry using the Azure portal
+### Create a container registry using the Azure CLI
 ```
 az login
 
