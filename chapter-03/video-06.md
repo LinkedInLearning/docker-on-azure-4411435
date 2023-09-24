@@ -22,7 +22,7 @@ $acisubnetnsg = "aci-subnet-nsg"
 
 ### Create a NSG rule to block outbound traffic on ports 80 and 443
 ```
-az network nsg rule create --name "Block-Outbound-HTTP-HTTPS" --nsg-name $acisubnetnsg --priority 1000 --resource-group $group --access Deny --source-address-prefixes "*" --source-port-ranges "*" --destination-address-prefixes "*" --destination-port-ranges "80, 443" --protocol Tcp --direction Outbound
+az network nsg rule create --name "Block-Outbound-HTTP-HTTPS" --nsg-name $acisubnetnsg --priority 1000 --resource-group $group --access Deny --source-address-prefixes "*" --source-port-ranges "*" --destination-address-prefixes "*" --destination-port-ranges 80, 443 --protocol Tcp --direction Outbound
 ```
 
 ### Verify NSG effectiveness (Wait for some minutes )
