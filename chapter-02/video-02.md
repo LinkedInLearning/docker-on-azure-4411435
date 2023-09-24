@@ -27,7 +27,7 @@ az container create --resource-group $group --name "containerapp-aci" --image "$
 
 ### Validate that the container app is running
 ```
-$acifqdn = $(az container show --resource-group $group --name containerapp --query ipAddress.fqdn --output tsv)
+$acifqdn = $(az container show --resource-group $group --name "containerapp-aci" --query ipAddress.fqdn --output tsv)
 
 start chrome http://$acifqdn
 ```
