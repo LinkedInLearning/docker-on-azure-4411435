@@ -5,11 +5,6 @@
 $group = "DockerOnAzureCourse-HOL-RG"
 $location = "eastus"
 $vnet = "DOAz-VNet"
-
-$acrname = $(az acr list --resource-group $group --query [0].name --output tsv)
-$acrloginserver = $(az acr show --name $acrname --query loginServer)
-$acrusername = $(az acr credential show --name $acrname --query username)
-$acrpassword = $(az acr credential show --name $acrname --query 'passwords[0].value')
 ```
 
 ### Create vNet and subnet
@@ -28,11 +23,9 @@ az vm open-port --port 22 --resource-group $group --name LinuxVM
 ### Deploy a container instance into a subnet
 ```
 $random = Get-Random
-$aciname = "ubuntucontainer$random"
+$aciname = "nginxcontainer$random"
 
 az container create --resource-group $group --name $aciname --image nginx --vnet $vnet --subnet aci-subnet --ports 80 443
-
-az container create --resource-group $group --name $aciname --image ubuntu --vnet $vnet --subnet aci-subnet --command-line "tail -f /dev/null" --registry-login-server $acrloginserver --registry-username $acrusername --registry-password $acrpassword --ports 22
 ```
 
 ### Verify private access to the container instance
