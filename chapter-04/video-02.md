@@ -11,7 +11,7 @@ sharename="containerstore"
 
 ### Create a storage account with the parameters
 ```
-az storage account create -g $group -n $storagestorageAccountNameacct -l $location --sku Standard_LRS --kind StorageV2
+az storage account create -g $group -n $storageAccountName -l $location --sku Standard_LRS --kind StorageV2
 ```
 
 ### Create a file share in the storage account
@@ -21,7 +21,7 @@ az storage share create --name $sharename --account-name $storageAccountName
 
 ### Get the storage credentials (this will be needed later)
 ```
-$storageAccountKey = $(az storage account keys list -g $group --account-name $storageAccountName --query "[0].value" --output tsv)
+storageAccountKey=$(az storage account keys list -g $group --account-name $storageAccountName --query "[0].value" --output tsv)
 
 echo $storageAccountKey
 ```
