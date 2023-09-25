@@ -26,8 +26,6 @@ properties:
       volumeMounts:
       - mountPath: /mnt/shareddata
         name: emptydir
-  osType: Linux
-  restartPolicy: Always
   - name: aci-app-02
     properties:
       environmentVariables: []
