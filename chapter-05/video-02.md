@@ -49,7 +49,7 @@ tags: {}
 type: Microsoft.ContainerInstance/containerGroups
 ```
 
-### Create the container instance using the YAML template
+### Create the container group using the YAML template
 ```
 az container create --resource-group $group --file faulty-aci-demo.yaml
 ```
