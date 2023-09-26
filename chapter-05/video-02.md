@@ -4,7 +4,7 @@ group="DockerOnAzureCourse-HOL-RG"
 location="eastus"
 ```
 
-### Create a YAML file for the container instance
+### Create a YAML file for the container group
 ```
 code faulty-aci-demo.yaml
 
@@ -52,9 +52,4 @@ type: Microsoft.ContainerInstance/containerGroups
 ### Create the container group using the YAML template
 ```
 az container create --resource-group $group --file faulty-aci-demo.yaml
-```
-
-### Clean up resources
-```
-az group delete --name $group --yes --no-wait
 ```
