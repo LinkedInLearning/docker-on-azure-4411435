@@ -20,7 +20,7 @@
 
 * Run the following command to install Docker Desktop on the Windows VM using chocolatey
 ```
-choco install docker-desktop -y
+choco install docker-desktop --version=4.23.0 -y
 ```
 
 * Wait for the installation to complete, then restart the VM
